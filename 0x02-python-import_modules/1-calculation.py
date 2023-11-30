@@ -1,13 +1,10 @@
 #!/usr/bin/python3
+
 if __name__ == "__main__":
-a = 10
-b = 5
 
-with open('calculator_1.py', 'r') as file:
-    code = file.read()
-
-# Execute the content of the file
-exec(code)
+from calculator_1 import add, sub, mul, div
+    a = 10
+    b = 5
 
 add_result = add(a, b)
 sub_result = sub(a, b)
