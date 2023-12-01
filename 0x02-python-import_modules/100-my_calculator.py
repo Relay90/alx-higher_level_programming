@@ -10,6 +10,8 @@ def mul(a, b):
     return a * b
 
 def div(a, b):
+    if b == 0:
+        return "Error! Division by zero is not allowed."
     return a / b
 
 if __name__ == "__main__":
@@ -27,14 +29,16 @@ if __name__ == "__main__":
 
     if operator == '+':
         result = add(a, b)
+        print(f"{a} + {b} = {result}")
     elif operator == '-':
         result = sub(a, b)
+        print(f"{a} - {b} = {result}")
     elif operator == '*':
         result = mul(a, b)
+        print(f"{a} * {b} = {result}")
     elif operator == '/':
         result = div(a, b)
+        print(f"{a} / {b} = {result}")
     else:
         print("Unknown operator. Available operators: +, -, * and /")
         sys.exit(1)
-
-    print(f"{a} {operator} {b} = {result}")
