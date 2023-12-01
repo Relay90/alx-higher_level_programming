@@ -25,4 +25,5 @@ if __name__ == "__main__":
         print("Unknown operator. Available operators: +, -, * and /")
         sys.exit(1)
 
-        print(f"{a} {operator} {b} = {result}")
+    print(f"{a} {operator} {b} = {result}")  # Corrected indentation to display the result
+
