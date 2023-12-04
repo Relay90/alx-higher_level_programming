@@ -1,48 +1,46 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include "lists.h"
 
+int is_palindrome_util(listint_t **left, listint_t *right);
+
 /**
- * is_palindrome - checks if a singly linked list is a palindrome
- * @head: pointer to head of list
- * Return: 1 if palindrome, 0 otherwise
+ * is_palindrome - Checks if a singly linked list is a palindrome.
+ * @head: A pointer to the head of the linked list.
+ *
+ * Return: If the linked list is not a palindrome - 0.
+ *         If the linked list is a palindrome - 1.
  */
 int is_palindrome(listint_t **head)
 {
-    listint_t *current = *head;
-    int length = 0, i = 0;
-    int *arr;
+	if (*head == NULL || (*head)->next == NULL)
+		return (1);
 
-    if (*head == NULL || (*head)->next == NULL)
-        return (1);
+	return (is_palindrome_util(head, *head));
+}
 
-    while (current != NULL)
-    {
-        length++;
-        current = current->next;
-    }
+/**
+ * is_palindrome_util - Utility function for palindrome check using recursion.
+ * @left: A pointer to the left node in the linked list.
+ * @right: A pointer to the right node in the linked list.
+ *
+ * Return: If the linked list is not a palindrome - 0.
+ *         If the linked list is a palindrome - 1.
+ */
+int is_palindrome_util(listint_t **left, listint_t *right)
+{
+	int isp;
 
-    arr = malloc(sizeof(int) * length);
-    if (arr == NULL)
-        return (0);
+	/* Base case */
+	if (right == NULL)
+		return (1);
 
-    current = *head;
-    while (current != NULL)
-    {
-        arr[i] = current->n;
-        i++;
-        current = current->next;
-    }
+	isp = is_palindrome_util(left, right->next);
 
-    for (i = 0; i < length / 2; i++)
-    {
-        if (arr[i] != arr[length - i - 1])
-        {
-            free(arr);
-            return (0);
-        }
-    }
+	if (isp == 0)
+		return (0);
 
-    free(arr);
-    return (1);
+	isp = (right->n == (*left)->n);
+
+	*left = (*left)->next;
+
+	return (isp);
 }
