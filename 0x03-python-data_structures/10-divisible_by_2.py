@@ -1,12 +1,11 @@
-#!/usr/bin/python3
-def max_integer(my_list=[]):
-    if not my_list:  # Check if the list is empty
-        return (None)
+#!/usr/bin/python
 
-    max_val = my_list[0]  # Assume first element as maximum
+def divisible_by_2(my_list=[]):
+    multiples = []
+    for i in range(len(my_list)):
+        if my_list[i] % 2 == 0:
+            multiples.append(True)
+        else:
+            multiples.append(False)
 
-    for num in my_list:
-        if num > max_val:
-            max_val = num
-
-    return (max_val)
+    return (multiples)
