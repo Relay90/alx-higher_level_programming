@@ -1,6 +1,29 @@
 #include "lists.h"
 
-int is_palindrome_util(listint_t **left, listint_t *right);
+listint_t *reverse_listint(listint_t **head);
+int is_palindrome(listint_t **head);
+
+/**
+ * reverse_listint - Reverses a singly-linked listint_t list.
+ * @head: A pointer to the starting node of the list to reverse.
+ *
+ * Return: A pointer to the head of the reversed list.
+ */
+listint_t *reverse_listint(listint_t **head)
+{
+	listint_t *node = *head, *next, *prev = NULL;
+
+	while (node)
+	{
+		next = node->next;
+		node->next = prev;
+		prev = node;
+		node = next;
+	}
+
+	*head = prev;
+	return (*head);
+}
 
 /**
  * is_palindrome - Checks if a singly linked list is a palindrome.
@@ -11,36 +34,39 @@ int is_palindrome_util(listint_t **left, listint_t *right);
  */
 int is_palindrome(listint_t **head)
 {
+	listint_t *tmp, *rev, *mid;
+	size_t size = 0, i;
+
 	if (*head == NULL || (*head)->next == NULL)
 		return (1);
 
-	return (is_palindrome_util(head, *head));
-}
+	tmp = *head;
+	while (tmp)
+	{
+		size++;
+		tmp = tmp->next;
+	}
 
-/**
- * is_palindrome_util - Utility function for palindrome check using recursion.
- * @left: A pointer to the left node in the linked list.
- * @right: A pointer to the right node in the linked list.
- *
- * Return: If the linked list is not a palindrome - 0.
- *         If the linked list is a palindrome - 1.
- */
-int is_palindrome_util(listint_t **left, listint_t *right)
-{
-	int isp;
+	tmp = *head;
+	for (i = 0; i < (size / 2) - 1; i++)
+		tmp = tmp->next;
 
-	/* Base case */
-	if (right == NULL)
-		return (1);
-
-	isp = is_palindrome_util(left, right->next);
-
-	if (isp == 0)
+	if ((size % 2) == 0 && tmp->n != tmp->next->n)
 		return (0);
 
-	isp = (right->n == (*left)->n);
+	tmp = tmp->next->next;
+	rev = reverse_listint(&tmp);
+	mid = rev;
 
-	*left = (*left)->next;
+	tmp = *head;
+	while (rev)
+	{
+		if (tmp->n != rev->n)
+			return (0);
+		tmp = tmp->next;
+		rev = rev->next;
+	}
+	reverse_listint(&mid);
 
-	return (isp);
+	return (1);
 }

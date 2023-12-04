@@ -1,6 +1,6 @@
 #!/usr/bin/python3
-
-a, b = 10, 89
+a = 89
+b = 10
 # Insert your code below this comment
 a, b = b, a
 
