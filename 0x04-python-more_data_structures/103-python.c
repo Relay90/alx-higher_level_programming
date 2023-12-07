@@ -1,29 +1,45 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <Python.h>
 
+/**
+ * print_python_list - Prints information about a Python list
+ * @p: A pointer to a Python object (PyObject) that should represent a list
+ *
+ * Return: None
+ */
 void print_python_list(PyObject *p)
 {
 	Py_ssize_t size, i;
-	PyListObject *list;
+	PyObject *item;
+
+	if (!PyList_Check(p))
+	{
+		printf("[*] Python list info\n");
+		printf("[!] Invalid List Object\n");
+		return;
+	}
 
 	size = PyList_Size(p);
-	list = (PyListObject *)p;
 
 	printf("[*] Python list info\n");
 	printf("[*] Size of the Python List = %ld\n", size);
-	printf("[*] Allocated = %ld\n", list->allocated);
 
 	for (i = 0; i < size; i++)
 	{
-		printf("Element %ld: %s\n", i, Py_TYPE(list->ob_item[i])->tp_name);
+		item = PyList_GetItem(p, i);
+		printf("Element %ld: %s\n", i, item->ob_type->tp_name);
 	}
 }
 
+/**
+ * print_python_bytes - Prints information about a Python bytes object
+ * @p: pointer to a Python object (PyObject) that should
+ * represent a bytes object.
+ * Return: None
+ */
 void print_python_bytes(PyObject *p)
 {
 	Py_ssize_t size, i;
-	PyBytesObject *bytes;
 	unsigned char *string;
 
 	if (!PyBytes_Check(p))
@@ -33,9 +49,8 @@ void print_python_bytes(PyObject *p)
 		return;
 	}
 
-	size = PyBytes_Size(p);
-	bytes = (PyBytesObject *)p;
-	string = (unsigned char *)bytes->ob_sval;
+	size = PyObject_Size(p);
+	string = (unsigned char *)PyBytes_AsString(p);
 
 	printf("[.] bytes object info\n");
 	printf("  size: %ld\n", size);
