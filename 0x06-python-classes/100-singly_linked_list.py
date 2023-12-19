@@ -1,16 +1,29 @@
 #!/usr/bin/python3
-
+"""Class for Node"""
 
 
 class Node:
-    """Class Node that defines a node of a singly linked list."""
+    """ defines a node of a singly linked list
+        Attributes:
+            data (int): data
+            next_node (Node, optional): node
+    """
 
     def __init__(self, data, next_node=None):
-        """Initialize the Node instance with data and next_node."""
+        """Initialize Node
+        args:
+            data (int): data stored in node
+            next_node (Node): next node
+        """
+        self.data = data
+        self.next_node = next_node
 
     @property
     def data(self):
-        """Retrieve the data of the Node."""
+        """data getter
+        returns:
+            data (int)
+        """
         return self.__data
 
     @data.setter
