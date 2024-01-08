@@ -7,7 +7,10 @@ Module with class MyList
 
 
 class MyList(list):
+    pass
+
+
     def print_sorted(self):
         """Prints the list in ascending order"""
-        sorted_list = sorted(self)
-        print(sorted_list)
+
+        print(sorted(list(self)))
