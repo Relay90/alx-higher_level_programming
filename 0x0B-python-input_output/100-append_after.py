@@ -18,8 +18,8 @@ def append_after(filename="", search_string="", new_string=""):
 
             for line in lines:
                 file.write(line)
-                if search_string in line:
+                if search_string in line.strip():
                     file.write(new_string + '\n')  # Append new_string after line
-    
+
     except FileNotFoundError:
         print(f"File '{filename}' not found.")
