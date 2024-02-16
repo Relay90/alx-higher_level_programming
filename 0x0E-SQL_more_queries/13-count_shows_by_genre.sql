@@ -1,5 +1,8 @@
 -- Script to list all genres and the number of shows linked to each in hbtn_0d_tvshows
 
+-- Create the database if it doesn't exist
+CREATE DATABASE IF NOT EXISTS hbtn_0d_tvshows;
+
 -- Use the specified database
 USE hbtn_0d_tvshows;
 

@@ -13,4 +13,11 @@ CREATE TABLE IF NOT EXISTS states (
 );
 
 -- Insert data into the states table
-INSERT INTO states (name) VALUES ('California'), ('Arizona'), ('Texas');
+INSERT INTO states (name) VALUES
+    ('California'),
+    ('Arizona'),
+    ('Nevada'),
+    ('Illinois'),
+    ('New York'),
+    ('Louisiana')
+    ON DUPLICATE KEY UPDATE id = id + 1;
